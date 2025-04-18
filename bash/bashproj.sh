@@ -3,7 +3,7 @@
 # Bash Script to Analyze Network Traffic
 
 # Input: Path to the Wireshark pcap file
-[ -f $1 ] || 'echo "no such file" && exit 1'
+[ -f $1 ] || { echo "no such file" && exit 1; }
 pcap_file="$1" # capture input from terminal.
 
 
