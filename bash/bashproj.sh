@@ -10,10 +10,10 @@ pcap_file="$1" # capture input from terminal.
 declare output=$(tshark -r "${pcap_file}") 
 #save the output to avoid redundant opening
 declare total=$(echo "${output}" | wc -l)
-declare top_5_dst=$(tshark -T fields -e ip.dst -r "${pcap_file}" | sort | grep -v "^$" | uniq -c | sort -nr)
+declare top_5_dst=$(tshark -T fields -e ip.dst -r "${pcap_file}" | sort | grep -v "^$" | uniq -c | sort -nr | head -n 5)
 
 declare top_5_src=$(tshark -T fields -e ip.src -r "${pcap_file}" | sort | grep -v "^$" | uniq -c | sort -nr)
-declare protocols=$(echo -n "${output}" |  tr -s ' ' | cut -d ' ' -f 7 | sort | grep -v "^$" | uniq -c | sort -nr)
+declare protocols=$(echo -n "${output}" |  tr -s ' ' | cut -d ' ' -f 7 | sort | grep -v "^$" | uniq -c | sort -nr | head -n 5)
 
 # Function to extract information from the pcap file
 analyze_traffic() {
